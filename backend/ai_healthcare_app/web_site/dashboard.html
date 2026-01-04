@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HealthTracker Pro — Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <div class="brand">
+        <span class="brand-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <a href="index.html" class="brand-text">HealthTracker <strong>Pro</strong></a>
+      </div>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Health Profile</a></li>
+        <li><a href="analysis.html">AI Analysis</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="dashboard.html">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container page-dashboard">
+    <h1>Dashboard</h1>
+    <div class="grid dash-grid">
+      <div class="card stat">
+        <h3>Heart Rate</h3>
+        <p class="stat-value">72 bpm</p>
+        <p class="muted">Resting average</p>
+      </div>
+      <div class="card stat">
+        <h3>BMI</h3>
+        <p class="stat-value">23.4</p>
+        <p class="muted">Healthy range</p>
+      </div>
+      <div class="card stat">
+        <h3>Glucose</h3>
+        <p class="stat-value">98 mg/dL</p>
+        <p class="muted">Fasting</p>
+      </div>
+    </div>
+
+    <div class="grid two-col">
+      <div class="card">
+        <h3>Trend Charts (placeholder)</h3>
+        <div class="chart-placeholder">Charts will render here</div>
+      </div>
+
+      <div class="card recent">
+        <h3>Recent Activity</h3>
+        <ul class="activity-list">
+          <li>Logged blood pressure — 12 mins ago</li>
+          <li>AI analysis run — 1 day ago</li>
+          <li>Report downloaded — 3 days ago</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer small">
+    <div class="container footer-inner">
+      <div class="brand-col">
+        <h4>HealthTracker Pro</h4>
+        <p>AI health insights for better care.</p>
+      </div>
+      <div class="links-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">© 2025 HealthTracker Pro</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

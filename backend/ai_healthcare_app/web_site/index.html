@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HealthTracker Pro — Home</title>
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR (shared) -->
+  <header class="site-header">
+    <nav class="nav container">
+      <div class="brand">
+        <span class="brand-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <a href="index.html" class="brand-text">HealthTracker <strong>Pro</strong></a>
+      </div>
+
+      <button class="nav-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Health Profile</a></li>
+        <li><a href="analysis.html">AI Analysis</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="dashboard.html">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <main>
+    <section class="hero">
+      <div class="hero-overlay"></div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Your Health, <span class="accent">Simplified</span></h1>
+          <p class="lead">AI-powered health insights, easy tracking and secure medical records — all in one place.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="dashboard.html">Get Started Free</a>
+            <button class="btn btn-ghost" id="watchDemo">Watch Demo</button>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <!-- Floating medical icons -->
+          <div class="floating-icons">
+            <i class="fa-solid fa-heart pulse"></i>
+            <i class="fa-solid fa-lungs"></i>
+            <i class="fa-solid fa-notes-medical"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features container" id="features">
+      <h2>Powerful Features for Complete Health Management</h2>
+      <div class="grid features-grid">
+        <a class="card" href="dashboard.html">
+          <i class="fa-solid fa-gauge-high feature-icon"></i>
+          <h3>Smart Dashboard</h3>
+          <p>Personalized health summary and trends at a glance.</p>
+        </a>
+
+        <a class="card" href="analysis.html">
+          <i class="fa-solid fa-robot feature-icon"></i>
+          <h3>AI Health Analysis</h3>
+          <p>Early risk detection powered by machine learning.</p>
+        </a>
+
+        <a class="card" href="reports.html">
+          <i class="fa-solid fa-file-medical feature-icon"></i>
+          <h3>Medical Reports</h3>
+          <p>Download and share clinical reports securely.</p>
+        </a>
+
+        <a class="card" href="profile.html">
+          <i class="fa-solid fa-user-doctor feature-icon"></i>
+          <h3>Health Profile</h3>
+          <p>Complete personal and medical history management.</p>
+        </a>
+
+        <a class="card" href="settings.html">
+          <i class="fa-solid fa-lock feature-icon"></i>
+          <h3>Privacy & Security</h3>
+          <p>Enterprise-grade data protection and controls.</p>
+        </a>
+
+        <div class="card">
+          <i class="fa-solid fa-mobile-screen feature-icon"></i>
+          <h3>Mobile Ready</h3>
+          <p>Responsive app-like experience on all devices.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="testimonials container">
+      <h2>What our users say</h2>
+      <div class="grid testimonials-grid">
+        <div class="card testimonial">
+          <img src="https://i.pravatar.cc/80?img=12" alt="user">
+          <div class="t-body">
+            <p class="stars">★★★★★</p>
+            <p class="quote">"HealthTracker Pro helped me spot early signs of hypertension — life changing."</p>
+            <p class="meta"><strong>Maria S.</strong> — Patient</p>
+          </div>
+        </div>
+        <div class="card testimonial">
+          <img src="https://i.pravatar.cc/80?img=32" alt="user">
+          <div class="t-body">
+            <p class="stars">★★★★★</p>
+            <p class="quote">"The AI insights are accurate and actionable. Great tool for clinicians."</p>
+            <p class="meta"><strong>Dr. Lee</strong> — Cardiologist</p>
+          </div>
+        </div>
+        <div class="card testimonial">
+          <img src="https://i.pravatar.cc/80?img=45" alt="user">
+          <div class="t-body">
+            <p class="stars">★★★★★</p>
+            <p class="quote">"Clean UI and excellent reports — easy to share with my doctor."</p>
+            <p class="meta"><strong>Sam R.</strong> — User</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="container cta-inner">
+        <h2>Start tracking smarter today</h2>
+        <p class="lead">Join thousands who trust HealthTracker Pro to manage their wellness.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="dashboard.html">Start Free Trial</a>
+          <a class="btn btn-ghost" href="mailto:sales@healthtrackerpro.com">Contact Sales</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- DEMO MODAL -->
+  <div id="demoModal" class="modal" aria-hidden="true">
+    <div class="modal-dialog">
+      <button class="modal-close" id="closeDemo">×</button>
+      <h3>Watch Demo</h3>
+      <p>This is a demo placeholder — replace with an embedded video.</p>
+      <div class="video-placeholder">Demo Video</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="brand-col">
+        <h4>HealthTracker Pro</h4>
+        <p>Your AI-powered health companion. Secure, private, and built for clinicians and patients.</p>
+      </div>
+      <div class="links-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="dashboard.html">Dashboard</a></li>
+          <li><a href="profile.html">Profile</a></li>
+          <li><a href="analysis.html">AI Analysis</a></li>
+        </ul>
+      </div>
+      <div class="links-col">
+        <h5>Company</h5>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+        </ul>
+      </div>
+      <div class="social-col">
+        <h5>Follow</h5>
+        <div class="socials">
+          <a href="#"><i class="fa-brands fa-twitter"></i></a>
+          <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+          <a href="#"><i class="fa-brands fa-facebook"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="container footer-bottom">© 2025 HealthTracker Pro — All rights reserved</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>HealthTracker Pro — Health Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container">
+      <div class="brand">
+        <span class="brand-icon"><i class="fa-solid fa-shield-halved"></i></span>
+        <a href="index.html" class="brand-text">HealthTracker <strong>Pro</strong></a>
+      </div>
+      <button class="nav-toggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="profile.html">Health Profile</a></li>
+        <li><a href="analysis.html">AI Analysis</a></li>
+        <li><a href="reports.html">Reports</a></li>
+        <li><a href="settings.html">Settings</a></li>
+      </ul>
+      <div class="nav-cta">
+        <a class="btn btn-primary" href="dashboard.html">Get Started</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="container page-profile">
+    <h1>Health Profile</h1>
+    <div class="grid two-col">
+      <form id="profileForm" class="card form-card">
+        <h3>Personal Details</h3>
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Jane Doe" required>
+
+        <label>Email</label>
+        <input type="email" name="email" placeholder="you@example.com" required>
+
+        <label>Phone</label>
+        <input type="tel" name="phone" placeholder="+1 555 555 5555">
+
+        <label>Date of Birth</label>
+        <input type="date" name="dob">
+
+        <h4>Medical History</h4>
+        <label>Known Conditions</label>
+        <textarea name="conditions" rows="4" placeholder="Asthma, Diabetes..."></textarea>
+
+        <label>Allergies</label>
+        <input type="text" name="allergies" placeholder="Penicillin">
+
+        <div class="form-actions">
+          <button class="btn btn-primary" type="submit">Save Profile</button>
+        </div>
+      </form>
+
+      <aside class="card">
+        <h3>Medical Summary</h3>
+        <p>Editable fields appear on the left. Use this panel for quick metrics and last update stamps.</p>
+        <ul>
+          <li>Last Updated: <strong>Today</strong></li>
+          <li>Primary Care: Dr. Smith</li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer small">
+    <div class="container footer-inner">
+      <div class="brand-col">
+        <h4>HealthTracker Pro</h4>
+        <p>AI health insights for better care.</p>
+      </div>
+    </div>
+    <div class="container footer-bottom">© 2025 HealthTracker Pro</div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

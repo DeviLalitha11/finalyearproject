@@ -1,0 +1,932 @@
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+void main() {
+    runApp(const HealthTrackerProApp());
+}
+
+class HealthTrackerProApp extends StatelessWidget {
+    const HealthTrackerProApp({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return MaterialApp(
+            title: 'HealthTracker Pro',
+            theme: ThemeData(
+                useMaterial3: true,
+                fontFamily: 'Poppins',
+                textTheme: GoogleFonts.poppinsTextTheme(),
+            ),
+            home: const HomePage(),
+        );
+    }
+}
+
+class HomePage extends StatelessWidget {
+    const HomePage({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            body: SingleChildScrollView(
+                child: Column(
+                    children: [
+                        const TopNavBar(),
+                        const HeroSection(),
+                        const FeaturesSection(),
+                        const TestimonialSection(),
+                        const CallToActionSection(),
+                        const FooterSection(),
+                    ],
+                ),
+            ),
+        );
+    }
+}
+
+// TOP NAVIGATION BAR
+class TopNavBar extends StatelessWidget {
+    const TopNavBar({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.05),
+                        blurRadius: 10,
+                        offset: const Offset(0, 2),
+                    ),
+                ],
+            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                    // Logo
+                    Row(
+                        children: [
+                            Container(
+                                padding: const EdgeInsets.all(8),
+                                decoration: BoxDecoration(
+                                    gradient: const LinearGradient(
+                                        colors: [Color(0xFF14B8A6), Color(0xFF0EA5E9)],
+                                    ),
+                                    borderRadius: BorderRadius.circular(8),
+                                ),
+                                child: const Icon(Icons.shield, color: Colors.white, size: 24),
+                            ),
+                            const SizedBox(width: 12),
+                            Text(
+                                'HealthTracker Pro',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.black87,
+                                ),
+                            ),
+                        ],
+                    ),
+                    // Menu
+                    Row(
+                        children: const [
+                            NavMenuItem(label: 'Home'),
+                            NavMenuItem(label: 'Dashboard'),
+                            NavMenuItem(label: 'Health Profile'),
+                            NavMenuItem(label: 'AI Analysis'),
+                            NavMenuItem(label: 'Reports'),
+                            NavMenuItem(label: 'Settings'),
+                        ],
+                    ),
+                    // Get Started Button
+                    ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF14B8A6),
+                            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(24),
+                            ),
+                        ),
+                        child: Text(
+                            'Get Started',
+                            style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontWeight: FontWeight.w600,
+                            ),
+                        ),
+                    ),
+                ],
+            ),
+        );
+    }
+}
+
+class NavMenuItem extends StatelessWidget {
+    final String label;
+
+    const NavMenuItem({Key? key, required this.label}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Text(
+                label,
+                style: GoogleFonts.poppins(
+                    fontSize: 14,
+                    color: Colors.grey[700],
+                    fontWeight: FontWeight.w500,
+                ),
+            ),
+        );
+    }
+}
+
+// HERO SECTION
+class HeroSection extends StatelessWidget {
+    const HeroSection({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                        const Color(0xFF0EA5E9).withOpacity(0.9),
+                        const Color(0xFF14B8A6).withOpacity(0.9),
+                    ],
+                ),
+            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                    // Left Content
+                    Expanded(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                                Text(
+                                    'Your Health,\nSimplified',
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 56,
+                                        fontWeight: FontWeight.w800,
+                                        color: Colors.white,
+                                        height: 1.2,
+                                    ),
+                                ),
+                                const SizedBox(height: 24),
+                                Text(
+                                    'AI-powered health monitoring platform that transforms complex medical data into actionable insights for better health outcomes.',
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 16,
+                                        color: Colors.white.withOpacity(0.9),
+                                        height: 1.6,
+                                    ),
+                                    maxLines: 3,
+                                ),
+                                const SizedBox(height: 32),
+                                Row(
+                                    children: [
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.white,
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 32,
+                                                    vertical: 14,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(24),
+                                                ),
+                                            ),
+                                            child: Text(
+                                                'Get Started Free',
+                                                style: GoogleFonts.poppins(
+                                                    color: const Color(0xFF14B8A6),
+                                                    fontWeight: FontWeight.w700,
+                                                ),
+                                            ),
+                                        ),
+                                        const SizedBox(width: 16),
+                                        OutlinedButton(
+                                            onPressed: () {},
+                                            style: OutlinedButton.styleFrom(
+                                                side: const BorderSide(color: Colors.white, width: 2),
+                                                padding: const EdgeInsets.symmetric(
+                                                    horizontal: 32,
+                                                    vertical: 12,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                    borderRadius: BorderRadius.circular(24),
+                                                ),
+                                            ),
+                                            child: Text(
+                                                'Watch Demo',
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w700,
+                                                ),
+                                            ),
+                                        ),
+                                    ],
+                                ),
+                            ],
+                        ),
+                    ),
+                    // Right Icons
+                    Expanded(
+                        child: Center(
+                            child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                    FloatingIcon(
+                                        icon: Icons.favorite,
+                                        color: Colors.red,
+                                        top: 20,
+                                        right: 40,
+                                    ),
+                                    FloatingIcon(
+                                        icon: Icons.psychology,
+                                        color: Colors.purple,
+                                        top: 160,
+                                        right: 20,
+                                    ),
+                                    FloatingIcon(
+                                        icon: Icons.assessment,
+                                        color: Colors.orange,
+                                        bottom: 60,
+                                        right: 40,
+                                    ),
+                                    FloatingIcon(
+                                        icon: Icons.person,
+                                        color: Colors.blue,
+                                        bottom: 40,
+                                        right: 140,
+                                    ),
+                                ],
+                            ),
+                        ),
+                    ),
+                ],
+            ),
+        );
+    }
+}
+
+class FloatingIcon extends StatelessWidget {
+    final IconData icon;
+    final Color color;
+    final double? top;
+    final double? bottom;
+    final double? right;
+    final double? left;
+
+    const FloatingIcon({
+        Key? key,
+        required this.icon,
+        required this.color,
+        this.top,
+        this.bottom,
+        this.right,
+        this.left,
+    }) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Positioned(
+            top: top,
+            bottom: bottom,
+            right: right,
+            left: left,
+            child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.white.withOpacity(0.2),
+                    border: Border.all(color: Colors.white.withOpacity(0.3), width: 2),
+                ),
+                child: Icon(icon, color: color, size: 32),
+            ),
+        );
+    }
+}
+
+// FEATURES SECTION
+class FeaturesSection extends StatelessWidget {
+    const FeaturesSection({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        const features = [
+            FeatureData(
+                icon: Icons.dashboard,
+                title: 'Smart Dashboard',
+                description:
+                        'Comprehensive health overview with real-time monitoring and personalized insights for better health management.',
+            ),
+            FeatureData(
+                icon: Icons.psychology_alt,
+                title: 'AI Health Analysis',
+                description:
+                        'Advanced AI algorithms analyze your health data to provide predictive insights and early warning systems.',
+            ),
+            FeatureData(
+                icon: Icons.description,
+                title: 'Medical Reports',
+                description:
+                        'Secure storage and easy access to all your medical reports with intelligent categorization and search.',
+            ),
+            FeatureData(
+                icon: Icons.person,
+                title: 'Health Profile',
+                description:
+                        'Complete health profile management with medical history, medications, and personalized health goals.',
+            ),
+            FeatureData(
+                icon: Icons.security,
+                title: 'Privacy & Security',
+                description:
+                        'Enterprise-grade security with end-to-end encryption to protect your sensitive health information.',
+            ),
+            FeatureData(
+                icon: Icons.mobile_friendly,
+                title: 'Mobile Ready',
+                description:
+                        'Access your health data anytime, anywhere with our mobile-optimized platform.',
+            ),
+        ];
+
+        return Container(
+            padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
+            color: Colors.grey[50],
+            child: Center(
+                child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1200),
+                    child: Column(
+                        children: [
+                            Text(
+                                'Powerful Features for\nComplete Health Management',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 42,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.black87,
+                                    height: 1.3,
+                                ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                                'Everything you need to monitor, analyze, and improve your health in one comprehensive platform.',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    color: Colors.grey[600],
+                                    height: 1.6,
+                                ),
+                            ),
+                            const SizedBox(height: 60),
+                            GridView.count(
+                                crossAxisCount: 3,
+                                crossAxisSpacing: 24,
+                                mainAxisSpacing: 24,
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                children: features
+                                        .map((f) => FeatureCard(data: f))
+                                        .toList(),
+                            ),
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
+class FeatureData {
+    final IconData icon;
+    final String title;
+    final String description;
+
+    const FeatureData({
+        required this.icon,
+        required this.title,
+        required this.description,
+    });
+}
+
+class FeatureCard extends StatelessWidget {
+    final FeatureData data;
+
+    const FeatureCard({Key? key, required this.data}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            padding: const EdgeInsets.all(32),
+            decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.08),
+                        blurRadius: 16,
+                        offset: const Offset(0, 4),
+                    ),
+                ],
+            ),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                    Container(
+                        padding: const EdgeInsets.all(12),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            gradient: const LinearGradient(
+                                colors: [Color(0xFF14B8A6), Color(0xFF0EA5E9)],
+                            ),
+                        ),
+                        child: Icon(data.icon, color: Colors.white, size: 28),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                        data.title,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black87,
+                        ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                        data.description,
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: Colors.grey[600],
+                            height: 1.6,
+                        ),
+                    ),
+                ],
+            ),
+        );
+    }
+}
+
+// TESTIMONIAL SECTION
+class TestimonialSection extends StatelessWidget {
+    const TestimonialSection({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        const testimonials = [
+            TestimonialData(
+                rating: 5,
+                text:
+                        'HealthTracker Pro has revolutionized how I monitor my patients. The AI insights are incredibly accurate and help me provide better care.',
+                name: 'Dr. Sarah Johnson',
+                role: 'Cardiologist',
+            ),
+            TestimonialData(
+                rating: 5,
+                text:
+                        'The health tracking features are amazing. I can easily monitor my progress and the AI recommendations have improved my overall wellness.',
+                name: 'Michael Chen',
+                role: 'Health Enthusiast',
+            ),
+            TestimonialData(
+                rating: 5,
+                text:
+                        'I recommend HealthTracker Pro to all my clients. The comprehensive health insights help them achieve their fitness goals faster.',
+                name: 'Emma Rodriguez',
+                role: 'Fitness Coach',
+            ),
+        ];
+
+        return Container(
+            padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
+            color: Colors.white,
+            child: Center(
+                child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1200),
+                    child: Column(
+                        children: [
+                            Text(
+                                'Trusted by Healthcare\nProfessionals & Patients',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 42,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.black87,
+                                    height: 1.3,
+                                ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                                'See what healthcare professionals and health-conscious individuals say about HealthTracker Pro.',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    color: Colors.grey[600],
+                                    height: 1.6,
+                                ),
+                            ),
+                            const SizedBox(height: 60),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: testimonials
+                                        .map((t) => Expanded(
+                                                    child: Padding(
+                                                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                                                        child: TestimonialCard(data: t),
+                                                    ),
+                                                ))
+                                        .toList(),
+                            ),
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
+class TestimonialData {
+    final int rating;
+    final String text;
+    final String name;
+    final String role;
+
+    const TestimonialData({
+        required this.rating,
+        required this.text,
+        required this.name,
+        required this.role,
+    });
+}
+
+class TestimonialCard extends StatelessWidget {
+    final TestimonialData data;
+
+    const TestimonialCard({Key? key, required this.data}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            padding: const EdgeInsets.all(28),
+            decoration: BoxDecoration(
+                color: Colors.grey[50],
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.grey[200]!, width: 1),
+            ),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    Row(
+                        children: List.generate(
+                            5,
+                            (index) => Icon(
+                                Icons.star,
+                                color: const Color(0xFFFFA500),
+                                size: 16,
+                            ),
+                        ),
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                        data.text,
+                        style: GoogleFonts.poppins(
+                            fontSize: 14,
+                            color: Colors.grey[700],
+                            height: 1.6,
+                        ),
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                        data.name,
+                        style: GoogleFonts.poppins(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.black87,
+                        ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                        data.role,
+                        style: GoogleFonts.poppins(
+                            fontSize: 13,
+                            color: Colors.grey[600],
+                        ),
+                    ),
+                ],
+            ),
+        );
+    }
+}
+
+// CALL TO ACTION SECTION
+class CallToActionSection extends StatelessWidget {
+    const CallToActionSection({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            padding: const EdgeInsets.symmetric(vertical: 80, horizontal: 40),
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                        const Color(0xFF14B8A6),
+                        const Color(0xFF0EA5E9),
+                    ],
+                ),
+            ),
+            child: Center(
+                child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: Column(
+                        children: [
+                            Text(
+                                'Ready to Transform Your\nHealth Journey?',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 40,
+                                    fontWeight: FontWeight.w800,
+                                    color: Colors.white,
+                                    height: 1.3,
+                                ),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                                'Join thousands of users who have already improved their health with our AI-powered platform.',
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    fontSize: 16,
+                                    color: Colors.white.withOpacity(0.9),
+                                    height: 1.6,
+                                ),
+                            ),
+                            const SizedBox(height: 40),
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                    ElevatedButton(
+                                        onPressed: () {},
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white,
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 32,
+                                                vertical: 14,
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(24),
+                                            ),
+                                        ),
+                                        child: Text(
+                                            'Start Free Trial',
+                                            style: GoogleFonts.poppins(
+                                                color: const Color(0xFF14B8A6),
+                                                fontWeight: FontWeight.w700,
+                                            ),
+                                        ),
+                                    ),
+                                    const SizedBox(width: 16),
+                                    OutlinedButton(
+                                        onPressed: () {},
+                                        style: OutlinedButton.styleFrom(
+                                            side: const BorderSide(color: Colors.white, width: 2),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 32,
+                                                vertical: 12,
+                                            ),
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius: BorderRadius.circular(24),
+                                            ),
+                                        ),
+                                        child: Text(
+                                            'Contact Sales',
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.w700,
+                                            ),
+                                        ),
+                                    ),
+                                ],
+                            ),
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
+// FOOTER SECTION
+class FooterSection extends StatelessWidget {
+    const FooterSection({Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
+            color: Colors.grey[900],
+            child: Center(
+                child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1200),
+                    child: Column(
+                        children: [
+                            Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                    // Left Section
+                                    Expanded(
+                                        child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                                Row(
+                                                    children: [
+                                                        Container(
+                                                            padding: const EdgeInsets.all(8),
+                                                            decoration: BoxDecoration(
+                                                                gradient: const LinearGradient(
+                                                                    colors: [
+                                                                        Color(0xFF14B8A6),
+                                                                        Color(0xFF0EA5E9)
+                                                                    ],
+                                                                ),
+                                                                borderRadius: BorderRadius.circular(6),
+                                                            ),
+                                                            child: const Icon(
+                                                                Icons.shield,
+                                                                color: Colors.white,
+                                                                size: 20,
+                                                            ),
+                                                        ),
+                                                        const SizedBox(width: 8),
+                                                        Text(
+                                                            'HealthTracker Pro',
+                                                            style: GoogleFonts.poppins(
+                                                                fontSize: 14,
+                                                                fontWeight: FontWeight.w700,
+                                                                color: Colors.white,
+                                                            ),
+                                                        ),
+                                                    ],
+                                                ),
+                                                const SizedBox(height: 12),
+                                                Text(
+                                                    'AI-powered health monitoring platform for comprehensive wellness tracking and intelligent health insights.',
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 13,
+                                                        color: Colors.grey[400],
+                                                        height: 1.6,
+                                                    ),
+                                                    maxLines: 3,
+                                                ),
+                                                const SizedBox(height: 16),
+                                                Row(
+                                                    children: [
+                                                        SocialIcon(Icons.facebook),
+                                                        const SizedBox(width: 12),
+                                                        SocialIcon(Icons.camera_alt),
+                                                        const SizedBox(width: 12),
+                                                        SocialIcon(Icons.share),
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                    ),
+                                    // Right Columns
+                                    Expanded(
+                                        child: Row(
+                                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                            children: [
+                                                FooterColumn(
+                                                    title: 'PRODUCT',
+                                                    items: const [
+                                                        'Dashboard',
+                                                        'AI Analysis',
+                                                        'Health Reports',
+                                                        'Health Profile',
+                                                    ],
+                                                ),
+                                                FooterColumn(
+                                                    title: 'FEATURES',
+                                                    items: const [
+                                                        'Health Tracking',
+                                                        'AI Insights',
+                                                        'Report Management',
+                                                        'Profile Settings',
+                                                    ],
+                                                ),
+                                                FooterColumn(
+                                                    title: 'SUPPORT',
+                                                    items: const [
+                                                        'Help Center',
+                                                        'Contact Us',
+                                                        'Privacy Policy',
+                                                        'Terms of Service',
+                                                    ],
+                                                ),
+                                                FooterColumn(
+                                                    title: 'COMPANY',
+                                                    items: const [
+                                                        'About Us',
+                                                        'Careers',
+                                                        'Blog',
+                                                        'Press',
+                                                    ],
+                                                ),
+                                            ],
+                                        ),
+                                    ),
+                                ],
+                            ),
+                            const SizedBox(height: 40),
+                            Divider(color: Colors.grey[700]),
+                            const SizedBox(height: 24),
+                            Text(
+                                '© 2024 HealthTracker Pro. All rights reserved.',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 13,
+                                    color: Colors.grey[500],
+                                ),
+                            ),
+                        ],
+                    ),
+                ),
+            ),
+        );
+    }
+}
+
+class SocialIcon extends StatelessWidget {
+    final IconData icon;
+
+    const SocialIcon(this.icon, {Key? key}) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+                color: Colors.grey[800],
+                shape: BoxShape.circle,
+            ),
+            child: Icon(icon, color: Colors.grey[400], size: 16),
+        );
+    }
+}
+
+class FooterColumn extends StatelessWidget {
+    final String title;
+    final List<String> items;
+
+    const FooterColumn({
+        Key? key,
+        required this.title,
+        required this.items,
+    }) : super(key: key);
+
+    @override
+    Widget build(BuildContext context) {
+        return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+                Text(
+                    title,
+                    style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey[300],
+                    ),
+                ),
+                const SizedBox(height: 16),
+                ...items
+                        .map(
+                            (item) => Padding(
+                                padding: const EdgeInsets.only(bottom: 10),
+                                child: Text(
+                                    item,
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 13,
+                                        color: Colors.grey[400],
+                                    ),
+                                ),
+                            ),
+                        )
+                        .toList(),
+            ],
+        );
+    }
+}
