@@ -4,7 +4,8 @@ import '../../routes/app_routes.dart';
 enum StepState { completed, active, inactive }
 
 class HealthEntryStep2 extends StatefulWidget {
-  const HealthEntryStep2({super.key});
+  final Map<String, dynamic>? existingData;
+  const HealthEntryStep2({super.key, this.existingData});
 
   @override
   State<HealthEntryStep2> createState() => _HealthEntryStep2State();
@@ -18,6 +19,19 @@ class _HealthEntryStep2State extends State<HealthEntryStep2> {
   final TextEditingController _oxygenController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+
+    final data = widget.existingData;
+    if (data == null) return;
+
+    _bloodSugarController.text = data['bloodSugar']?.toString() ?? '';
+    _temperatureController.text = data['temperature']?.toString() ?? '';
+    _weightController.text = data['weight']?.toString() ?? '';
+    _oxygenController.text = data['oxygen']?.toString() ?? '';
+  }
+
+  @override
   void dispose() {
     _bloodSugarController.dispose();
     _temperatureController.dispose();
@@ -29,12 +43,9 @@ class _HealthEntryStep2State extends State<HealthEntryStep2> {
   void _continueToNextStep() {
     if (!_formKey.currentState!.validate()) return;
 
-    final step1Data =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
-
-    final step2Data = {
-      ...step1Data,
-      'bloodSugar': int.parse(_bloodSugarController.text),
+    final mergedData = {
+      ...(widget.existingData ?? {}), // ✅ keep ALL previous data
+      'bloodSugar': double.parse(_bloodSugarController.text),
       'temperature': double.parse(_temperatureController.text),
       'weight': double.parse(_weightController.text),
       'oxygen': int.parse(_oxygenController.text),
@@ -43,7 +54,7 @@ class _HealthEntryStep2State extends State<HealthEntryStep2> {
     Navigator.pushNamed(
       context,
       AppRoutes.healthEntryStep3,
-      arguments: step2Data,
+      arguments: mergedData,
     );
   }
 

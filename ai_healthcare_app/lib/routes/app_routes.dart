@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../screens/auth/home_page.dart';
-import '../screens/auth/signin_screen.dart';
+// import '../screens/auth/signin_screen.dart';
 import '../screens/auth/create_acct.dart';
 import '../screens/auth/login_page.dart';
 import '../screens/auth/health_profile.dart';
@@ -41,16 +40,16 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> get routes => {
         home: (context) => const HomePage(),
-        signin: (context) => const SignInPage(),
+        // signin: (context) => const SignInPage(),
         createAccount: (context) => const CreateAccountPage(),
         login: (context) => const LoginPage(),
         healthProfile: (context) => const HealthProfilePage(),
         securitySetup: (context) => const SecuritySetupPage(),
         dashboard: (context) => const DashboardPage(),
         aiAnalysis: (context) => const AIAnalysisPage(),
-        healthEntry: (context) => const HealthEntryStep1(),
-        healthEntryStep2: (context) => const HealthEntryStep2(),
-        healthEntryStep3: (context) => const HealthEntryStep3(),
+        // healthEntry: (context) => const HealthEntryStep1(),
+        // healthEntryStep2: (context) => const HealthEntryStep2(),
+        // healthEntryStep3: (context) => const HealthEntryStep3(),
         profile: (context) => const ProfilePage(),
         records: (context) => const MedicalRecordsPage(),
         settings: (context) => const SettingsScreen(),
@@ -59,4 +58,30 @@ class AppRoutes {
         aiResult: (context) => const AIResultPage(),
         authHome: (context) => const AuthHomePage(), // ✅ FIXED
       };
+
+      static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
+    switch (settings.name) {
+
+      case healthEntry:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (_) => HealthEntryStep1(existingData: args),
+        );
+
+      case healthEntryStep2:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (_) => HealthEntryStep2(existingData: args),
+        );
+
+      case healthEntryStep3:
+        final args = settings.arguments as Map<String, dynamic>?;
+        return MaterialPageRoute(
+          builder: (_) => HealthEntryStep3(existingData: args),
+        );
+
+      default:
+        return null;
+    }
+  }
 }

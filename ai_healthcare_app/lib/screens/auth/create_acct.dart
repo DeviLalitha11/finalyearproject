@@ -41,17 +41,23 @@ class _CreateAccountPageState extends State<CreateAccountPage> {
 
       // Create user account
       await authService.createUserWithEmailAndPassword(
-        _emailController.text.trim(),
-        _passwordController.text.trim()
-      );
+          _emailController.text.trim(), _passwordController.text.trim());
 
       // Save name, email, and phone to Firestore
       final user = FirebaseAuth.instance.currentUser;
       if (user != null) {
+        // ✅ Set display name
+        await user.updateDisplayName(_nameController.text.trim());
+
+        // 🔥 FORCE REFRESH AUTH USER (THIS IS THE MISSING PIECE)
+        await user.reload();
+
+        // ✅ Save to Firestore
         await FirebaseFirestore.instance.collection('users').doc(user.uid).set({
           'name': _nameController.text.trim(),
           'email': _emailController.text.trim(),
           'phone': _phoneController.text.trim(),
+          'createdAt': FieldValue.serverTimestamp(),
         }, SetOptions(merge: true));
       }
 

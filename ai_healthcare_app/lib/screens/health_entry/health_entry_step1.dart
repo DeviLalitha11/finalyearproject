@@ -22,17 +22,31 @@ class _HealthEntryStep1State extends State<HealthEntryStep1> {
     super.initState();
 
     final data = widget.existingData;
-    if (data != null) {
-      _heartRateController.text = data['heartRate']?.toString() ?? '';
+    if (data == null) return;
 
-      final bp = data['bloodPressure'];
-      if (bp != null) {
-        _systolicController.text = bp['systolic']?.toString() ?? '';
-        _diastolicController.text = bp['diastolic']?.toString() ?? '';
+    // ---------------- PREFILL HEART RATE ----------------
+    _heartRateController.text = data['heartRate']?.toString() ?? '';
+
+    // ---------------- PREFILL BLOOD PRESSURE ----------------
+    final bp = data['bloodPressure'];
+
+    // Case 1: Stored as Map {systolic, diastolic}
+    if (bp is Map<String, dynamic>) {
+      _systolicController.text = bp['systolic']?.toString() ?? '';
+      _diastolicController.text = bp['diastolic']?.toString() ?? '';
+    }
+
+    // Case 2: Stored as String "120/80"
+    else if (bp is String && bp.contains('/')) {
+      final parts = bp.split('/');
+      if (parts.length == 2) {
+        _systolicController.text = parts[0];
+        _diastolicController.text = parts[1];
       }
     }
   }
 
+  @override
   void dispose() {
     _heartRateController.dispose();
     _systolicController.dispose();
@@ -43,7 +57,8 @@ class _HealthEntryStep1State extends State<HealthEntryStep1> {
   void _continueToNextStep() {
     if (!_formKey.currentState!.validate()) return;
 
-    final step1Data = {
+    final mergedData = {
+      ...(widget.existingData ?? {}), // 👈 keep old data
       'heartRate': int.parse(_heartRateController.text),
       'bloodPressure': {
         'systolic': int.parse(_systolicController.text),
@@ -54,7 +69,7 @@ class _HealthEntryStep1State extends State<HealthEntryStep1> {
     Navigator.pushNamed(
       context,
       AppRoutes.healthEntryStep2,
-      arguments: step1Data,
+      arguments: mergedData, // 👈 send FULL data
     );
   }
 

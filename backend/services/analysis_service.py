@@ -1,127 +1,213 @@
-# from .model_loader import (
-#     diabetes_model,
-#     heart_model,
-#     kidney_model,
-#     thyroid_model
-# )
+# # from .model_loader import (
+# #     diabetes_model,
+# #     heart_model,
+# #     kidney_model,
+# #     thyroid_model
+# # )
+
+# # from explainability.explanation_engine import generate_explanations
+# # from utils.suggestion_engine import generate_suggestions
+
+# # def run_full_analysis(health_data: dict) -> dict:
+# #     """
+# #     Central AI analysis function
+# #     """
+
+# #     risks = []
+# #     explanations = []
+# #     suggestions = []
+
+# #     # -----------------------------
+# #     # Extract inputs
+# #     # -----------------------------
+# #     heart_rate = health_data.get("heartRate")
+# #     blood_pressure = health_data.get("bloodPressure")  # "130/90"
+# #     blood_sugar = health_data.get("bloodSugar")
+# #     bmi = health_data.get("bmi")
+# #     oxygen = health_data.get("oxygen")
+# #     temperature = health_data.get("temperature")
+# #     symptoms = health_data.get("symptoms", [])
+
+# #     systolic, diastolic = map(int, blood_pressure.split("/"))
+
+# #     # -----------------------------
+# #     # DIABETES
+# #     # -----------------------------
+# #     diabetes_risk = diabetes_model.predict([[blood_sugar, bmi]])[0]
+# #     if diabetes_risk == 1:
+# #         risks.append("Diabetes")
+# #         explanations.append(
+# #             generate_explanations(
+# #                 "Diabetes", blood_sugar=blood_sugar, bmi=bmi, symptoms=symptoms
+# #             )
+# #         )
+# #         suggestions.extend(generate_suggestions("Diabetes", health_data))
+
+# #     # -----------------------------
+# #     # HEART DISEASE
+# #     # -----------------------------
+# #     heart_risk = heart_model.predict([[heart_rate, systolic, bmi, oxygen]])[0]
+# #     if heart_risk == 1:
+# #         risks.append("Heart Disease")
+# #         explanations.append(
+# #             generate_explanations(
+# #                 "Heart Disease",
+# #                 heart_rate=heart_rate,
+# #                 blood_pressure=blood_pressure,
+# #                 oxygen=oxygen,
+# #             )
+# #         )
+# #         suggestions.extend(generate_suggestions("Heart Disease", health_data))
+
+# #     # -----------------------------
+# #     # KIDNEY (rule + ML hybrid)
+# #     # -----------------------------
+# #     kidney_risk = 1 if blood_pressure and systolic > 140 else 0
+# #     if kidney_risk == 1:
+# #         risks.append("Kidney Disease")
+# #         explanations.append(
+# #             generate_explanations(
+# #                 "Kidney Disease", blood_pressure=blood_pressure
+# #             )
+# #         )
+# #         suggestions.extend(generate_suggestions("Kidney Disease", health_data))
+
+# #     # -----------------------------
+# #     # THYROID (rule-based)
+# #     # -----------------------------
+# #     if "Fatigue" in symptoms and temperature < 97:
+# #         risks.append("Thyroid Disorder")
+# #         explanations.append(
+# #             generate_explanations(
+# #                 "Thyroid", symptoms=symptoms, temperature=temperature
+# #             )
+# #         )
+# #         suggestions.extend(generate_suggestions("Thyroid", health_data))
+
+# #     # -----------------------------
+# #     # HYPERTENSION
+# #     # -----------------------------
+# #     hypertension_risk = hypertension_model.predict([[systolic, diastolic, bmi]])[0]
+# #     if hypertension_risk == 1:
+# #         risks.append("Hypertension")
+# #         explanations.append(
+# #             generate_explanations(
+# #                 "Hypertension", blood_pressure=blood_pressure, bmi=bmi
+# #             )
+# #         )
+# #         suggestions.extend(generate_suggestions("Hypertension", health_data))
+
+# #     # -----------------------------
+# #     # NO DISEASE CASE
+# #     # -----------------------------
+# #     if not risks:
+# #         return {
+# #             "status": "success",
+# #             "riskLevel": "Low",
+# #             "diseases": [],
+# #             "message": "No major health risks detected based on your current data.",
+# #             "recommendations": [
+# #                 "Maintain a balanced diet",
+# #                 "Exercise regularly",
+# #                 "Monitor health metrics periodically",
+# #             ],
+# #         }
+
+# #     # -----------------------------
+# #     # FINAL RESPONSE
+# #     # -----------------------------
+# #     return {
+# #         "status": "success",
+# #         "riskLevel": "High" if len(risks) >= 2 else "Moderate",
+# #         "diseases": list(set(risks)),
+# #         "explanations": explanations,
+# #         "suggestions": list(set(suggestions)),
+# #     }
+
+
+
+
+# from services.diabetes_service import analyze_diabetes
+# from services.heart_service import analyze_heart
+# from services.kidney_service import analyze_kidney
+# from services.thyroid_service import analyze_thyroid
+# from services.hypertension_service import analyze_hypertension
 
 # from explainability.explanation_engine import generate_explanations
 # from utils.suggestion_engine import generate_suggestions
 
-# def run_full_analysis(health_data: dict) -> dict:
-#     """
-#     Central AI analysis function
-#     """
+
+# def run_full_analysis(health_data: dict):
 
 #     risks = []
 #     explanations = []
 #     suggestions = []
 
-#     # -----------------------------
-#     # Extract inputs
-#     # -----------------------------
+#     # ---------------- SAFE EXTRACTION ----------------
 #     heart_rate = health_data.get("heartRate")
-#     blood_pressure = health_data.get("bloodPressure")  # "130/90"
 #     blood_sugar = health_data.get("bloodSugar")
 #     bmi = health_data.get("bmi")
+#     bp = health_data.get("bloodPressure")
 #     oxygen = health_data.get("oxygen")
-#     temperature = health_data.get("temperature")
-#     symptoms = health_data.get("symptoms", [])
 
-#     systolic, diastolic = map(int, blood_pressure.split("/"))
+#     systolic = None
+#     diastolic = None
+#     if bp and "/" in bp:
+#         systolic, diastolic = map(int, bp.split("/"))
 
-#     # -----------------------------
-#     # DIABETES
-#     # -----------------------------
-#     diabetes_risk = diabetes_model.predict([[blood_sugar, bmi]])[0]
-#     if diabetes_risk == 1:
-#         risks.append("Diabetes")
-#         explanations.append(
-#             generate_explanations(
-#                 "Diabetes", blood_sugar=blood_sugar, bmi=bmi, symptoms=symptoms
-#             )
-#         )
-#         suggestions.extend(generate_suggestions("Diabetes", health_data))
+#     # ---------------- DIABETES ----------------
+#     if blood_sugar and bmi:
+#         diabetes = analyze_diabetes(health_data)
+#         if diabetes:
+#             risks.append("Diabetes")
 
-#     # -----------------------------
-#     # HEART DISEASE
-#     # -----------------------------
-#     heart_risk = heart_model.predict([[heart_rate, systolic, bmi, oxygen]])[0]
-#     if heart_risk == 1:
-#         risks.append("Heart Disease")
-#         explanations.append(
-#             generate_explanations(
-#                 "Heart Disease",
-#                 heart_rate=heart_rate,
-#                 blood_pressure=blood_pressure,
-#                 oxygen=oxygen,
-#             )
-#         )
-#         suggestions.extend(generate_suggestions("Heart Disease", health_data))
+#     # ---------------- HEART ----------------
+#     if heart_rate and systolic:
+#         heart = analyze_heart(health_data)
+#         if heart:
+#             risks.append("Heart Disease")
 
-#     # -----------------------------
-#     # KIDNEY (rule + ML hybrid)
-#     # -----------------------------
-#     kidney_risk = 1 if blood_pressure and systolic > 140 else 0
-#     if kidney_risk == 1:
-#         risks.append("Kidney Disease")
-#         explanations.append(
-#             generate_explanations(
-#                 "Kidney Disease", blood_pressure=blood_pressure
-#             )
-#         )
-#         suggestions.extend(generate_suggestions("Kidney Disease", health_data))
+#     # ---------------- HYPERTENSION ----------------
+#     if systolic and diastolic:
+#         hyper = analyze_hypertension(health_data)
+#         if hyper:
+#             risks.append("Hypertension")
 
-#     # -----------------------------
-#     # THYROID (rule-based)
-#     # -----------------------------
-#     if "Fatigue" in symptoms and temperature < 97:
-#         risks.append("Thyroid Disorder")
-#         explanations.append(
-#             generate_explanations(
-#                 "Thyroid", symptoms=symptoms, temperature=temperature
-#             )
-#         )
-#         suggestions.extend(generate_suggestions("Thyroid", health_data))
+#     # ---------------- KIDNEY ----------------
+#     if systolic:
+#         kidney = analyze_kidney(health_data)
+#         if kidney:
+#             risks.append("Kidney Disease")
 
-#     # -----------------------------
-#     # HYPERTENSION
-#     # -----------------------------
-#     hypertension_risk = hypertension_model.predict([[systolic, diastolic, bmi]])[0]
-#     if hypertension_risk == 1:
-#         risks.append("Hypertension")
-#         explanations.append(
-#             generate_explanations(
-#                 "Hypertension", blood_pressure=blood_pressure, bmi=bmi
-#             )
-#         )
-#         suggestions.extend(generate_suggestions("Hypertension", health_data))
+#     # ---------------- THYROID ----------------
+#     if bmi:
+#         thyroid = analyze_thyroid(health_data)
+#         if thyroid:
+#             risks.append("Thyroid Disorder")
 
-#     # -----------------------------
-#     # NO DISEASE CASE
-#     # -----------------------------
+#     # ---------------- EXPLAINABILITY ----------------
+#     explanations = generate_explanations(health_data, risks)
+
+#     # ---------------- SUGGESTIONS ----------------
+#     suggestions = generate_suggestions(health_data, risks)
+
+#     # ---------------- FINAL RESPONSE ----------------
 #     if not risks:
 #         return {
 #             "status": "success",
 #             "riskLevel": "Low",
 #             "diseases": [],
 #             "message": "No major health risks detected based on your current data.",
-#             "recommendations": [
-#                 "Maintain a balanced diet",
-#                 "Exercise regularly",
-#                 "Monitor health metrics periodically",
-#             ],
+#             "explanations": [],
+#             "suggestions": suggestions
 #         }
 
-#     # -----------------------------
-#     # FINAL RESPONSE
-#     # -----------------------------
 #     return {
 #         "status": "success",
 #         "riskLevel": "High" if len(risks) >= 2 else "Moderate",
 #         "diseases": list(set(risks)),
 #         "explanations": explanations,
-#         "suggestions": list(set(suggestions)),
+#         "suggestions": list(set(suggestions))
 #     }
 
 
@@ -138,6 +224,10 @@ from utils.suggestion_engine import generate_suggestions
 
 
 def run_full_analysis(health_data: dict):
+    """
+    Main analysis orchestrator that runs all disease predictions
+    and generates explanations and suggestions.
+    """
 
     risks = []
     explanations = []
@@ -152,38 +242,61 @@ def run_full_analysis(health_data: dict):
 
     systolic = None
     diastolic = None
-    if bp and "/" in bp:
-        systolic, diastolic = map(int, bp.split("/"))
+    if bp and "/" in str(bp):
+        try:
+            parts = str(bp).split("/")
+            systolic = int(parts[0])
+            diastolic = int(parts[1])
+        except (ValueError, IndexError):
+            pass
 
     # ---------------- DIABETES ----------------
-    if blood_sugar and bmi:
-        diabetes = analyze_diabetes(health_data)
-        if diabetes:
-            risks.append("Diabetes")
+    if blood_sugar is not None and bmi is not None:
+        try:
+            diabetes = analyze_diabetes(health_data)
+            if diabetes:
+                risks.append("Diabetes")
+        except Exception as e:
+            print(f"Diabetes analysis error: {e}")
 
     # ---------------- HEART ----------------
-    if heart_rate and systolic:
-        heart = analyze_heart(health_data)
-        if heart:
-            risks.append("Heart Disease")
+    if heart_rate is not None and systolic is not None:
+        try:
+            heart = analyze_heart(health_data)
+            if heart:
+                risks.append("Heart Disease")
+        except Exception as e:
+            print(f"Heart analysis error: {e}")
 
     # ---------------- HYPERTENSION ----------------
-    if systolic and diastolic:
-        hyper = analyze_hypertension(health_data)
-        if hyper:
-            risks.append("Hypertension")
+    if systolic is not None and diastolic is not None:
+        try:
+            hyper = analyze_hypertension(health_data)
+            if hyper:
+                risks.append("Hypertension")
+        except Exception as e:
+            print(f"Hypertension analysis error: {e}")
 
     # ---------------- KIDNEY ----------------
-    if systolic:
-        kidney = analyze_kidney(health_data)
-        if kidney:
-            risks.append("Kidney Disease")
+    if systolic is not None:
+        try:
+            kidney = analyze_kidney(health_data)
+            if kidney:
+                risks.append("Kidney Disease")
+        except Exception as e:
+            print(f"Kidney analysis error: {e}")
 
     # ---------------- THYROID ----------------
-    if bmi:
-        thyroid = analyze_thyroid(health_data)
-        if thyroid:
-            risks.append("Thyroid Disorder")
+    if bmi is not None:
+        try:
+            thyroid = analyze_thyroid(health_data)
+            if thyroid:
+                risks.append("Thyroid Disorder")
+        except Exception as e:
+            print(f"Thyroid analysis error: {e}")
+
+    # Remove duplicates
+    risks = list(set(risks))
 
     # ---------------- EXPLAINABILITY ----------------
     explanations = generate_explanations(health_data, risks)
@@ -191,21 +304,45 @@ def run_full_analysis(health_data: dict):
     # ---------------- SUGGESTIONS ----------------
     suggestions = generate_suggestions(health_data, risks)
 
-    # ---------------- FINAL RESPONSE ----------------
-    if not risks:
-        return {
-            "status": "success",
-            "riskLevel": "Low",
-            "diseases": [],
-            "message": "No major health risks detected based on your current data.",
-            "explanations": [],
-            "suggestions": suggestions
-        }
+    # ---------------- DETERMINE RISK LEVEL ----------------
+    risk_level = "Low"
+    
+    # Calculate risk based on number of diseases and severity
+    if len(risks) >= 3:
+        risk_level = "High"
+    elif len(risks) == 2:
+        risk_level = "Moderate"
+    elif len(risks) == 1:
+        # Single disease is moderate, not high
+        risk_level = "Moderate"
+    else:
+        # No diseases detected - check for borderline values
+        borderline_factors = []
+        
+        # More lenient borderline checks
+        if blood_sugar and blood_sugar > 125:  # Changed from 100
+            borderline_factors.append("blood sugar")
+        if systolic and systolic > 130:  # Changed from 120
+            borderline_factors.append("blood pressure")
+        if bmi and bmi > 27:  # Changed from 23
+            borderline_factors.append("BMI")
+        if oxygen and oxygen < 93:  # Changed from 95
+            borderline_factors.append("oxygen")
+        if heart_rate and (heart_rate > 100 or heart_rate < 50):  # More extreme values
+            borderline_factors.append("heart rate")
+            
+        # Need more factors to be moderate
+        if len(borderline_factors) >= 3:
+            risk_level = "Moderate"
+        else:
+            risk_level = "Low"
 
+    # ---------------- FINAL RESPONSE ----------------
     return {
         "status": "success",
-        "riskLevel": "High" if len(risks) >= 2 else "Moderate",
-        "diseases": list(set(risks)),
+        "riskLevel": risk_level,
+        "diseases": risks,
         "explanations": explanations,
-        "suggestions": list(set(suggestions))
+        "suggestions": suggestions,
+        "message": "Analysis complete" if risks else "No major health risks detected"
     }
