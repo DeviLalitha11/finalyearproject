@@ -1,6 +1,9 @@
-fastapi
-uvicorn
+fastapi==0.110.0
+uvicorn[standard]==0.27.1
 numpy
 pandas
 scikit-learn
 joblib
+pydantic
+python-multipart
+xgboost
